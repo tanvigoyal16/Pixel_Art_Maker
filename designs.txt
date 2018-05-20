@@ -1,0 +1,32 @@
+$('#sizePicker').submit(function(event) {
+  event.preventDefault();//prevents default event on form submission
+  if($('#pixel_canvas').children().length==0) //checks if there is an existing grid and clears it out, before generating new grid
+  makeGrid();
+  else
+  {
+    $('#pixel_canvas').empty();
+    makeGrid();
+  }
+});
+
+function makeGrid() {
+  let gridHeight = $('#input_height').val();
+  let gridWidth = $('#input_width').val();
+  console.log("height" + gridHeight);
+  console.log("width" + gridWidth);
+  //for loop for making grid using tables and specified dimensions
+  for (let i = 0; i < gridHeight; i++) {
+    let gridRow = $('<tr></tr>');
+    $('#pixel_canvas').append();
+    for (let j = 0; j < gridWidth; j++) {
+      let gridColumn = $('<td></td>');
+      gridRow.append(gridColumn);
+    }
+    $('#pixel_canvas').append(gridRow);
+  }
+  // checks for the color that has been picked and colors the clicked grid accordingly
+  $('td').on('click', function(event) {
+    let colorInput = $('#colorPicker').val();
+    $(this).css('background-color', colorInput);
+  });
+}
